@@ -17,16 +17,23 @@
           Created: {{ task.datetime }}
         </p>
         {% if task.deadline %}
-          Deadline: {{ task.deadline }}
+          <p>Deadline: {{ task.deadline }}</p>
+        {% endif %}
+        {% if task.tags.exists %}
+          <p>Tags:
+            {% for tag in task.tags.all %}
+              {{ tag.name }}
+            {% endfor %}
+          </p>
         {% endif %}
       </div>
       <div>
         {% if task.done %}
-          <a href="#" class="btn btn-secondary">Undo</a>
+          <a href="{% url 'to_do_app:task_undo' task.id %}" class="btn btn-warning">Undo</a>
         {% else %}
-          <a href="#" class="btn btn-success">Complete</a>
+          <a href="{% url 'to_do_app:task_complete' task.id %}" class="btn btn-success">Complete</a>
         {% endif %}
-        <a href="{% url 'to_do_app:task_update' pk=task.id %}" class="btn btn-primary">Update</a>
+        <a href="{% url 'to_do_app:task_update' pk=task.id %}" class="btn btn-secondary">Update</a>
         <a href="{% url 'to_do_app:task_delete' pk=task.id %}" class="btn btn-danger">Delete</a>
       </div>
     </div>
