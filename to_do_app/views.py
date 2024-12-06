@@ -26,6 +26,7 @@ class TaskUpdateView(UpdateView):
     template_name = "to_do_app/task_create.html"
     success_url = reverse_lazy("to_do_app:task_list")
 
+
 class TaskDeleteView(DeleteView):
     model = Task
     success_url = reverse_lazy("to_do_app:task_list")
@@ -37,6 +38,7 @@ def task_complete(request, pk):
     task.done = True
     task.save()
     return redirect("to_do_app:task_list")
+
 
 def task_undo(request, pk):
     task = get_object_or_404(Task, pk=pk)

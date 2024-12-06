@@ -3,6 +3,7 @@ from django.utils.timezone import localtime, now
 
 from .models import Task
 
+
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
